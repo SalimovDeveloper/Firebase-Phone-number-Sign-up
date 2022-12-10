@@ -4,4 +4,8 @@
     <string name="send">Send</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="xush_kelibsiz">Xush kelibsiz!</string>
+    <string name="avtorizatsiyadan_o_tish_uchun_telefon_raqamingizni_kiriting">Avtorizatsiyadan o\'tish uchun telefon raqamingizni kiriting</string>
+    <string name="telefon_raqamingiz">Telefon raqamingiz</string>
+    <string name="next">Next</string>
 </resources>

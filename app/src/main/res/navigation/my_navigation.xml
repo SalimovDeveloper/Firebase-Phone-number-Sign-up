@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/my_navigation">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_navigation"
+    app:startDestination="@id/addNumber">
 
+    <fragment
+        android:id="@+id/addNumber"
+        android:name="uz.salimovdeveloper.firebasephonenumbersignup.fragments.AddNumber"
+        android:label="fragment_add_number"
+        tools:layout="@layout/fragment_add_number" >
+        <action
+            android:id="@+id/action_addNumber_to_addPassword"
+            app:destination="@id/addPassword" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPassword"
+        android:name="uz.salimovdeveloper.firebasephonenumbersignup.fragments.AddPassword"
+        android:label="fragment_add_password"
+        tools:layout="@layout/fragment_add_password" >
+        <action
+            android:id="@+id/action_addPassword_to_numberInfo"
+            app:destination="@id/numberInfo" />
+    </fragment>
+    <fragment
+        android:id="@+id/numberInfo"
+        android:name="uz.salimovdeveloper.firebasephonenumbersignup.fragments.NumberInfo"
+        android:label="fragment_number_info"
+        tools:layout="@layout/fragment_number_info" />
 </navigation>
