@@ -1,59 +1,112 @@
 package uz.salimovdeveloper.firebasephonenumbersignup.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
+import androidx.navigation.fragment.findNavController
+import com.google.firebase.FirebaseException
+import com.google.firebase.FirebaseTooManyRequestsException
+import com.google.firebase.auth.*
+import com.google.firebase.auth.ktx.oAuthCredential
 import uz.salimovdeveloper.firebasephonenumbersignup.R
+import uz.salimovdeveloper.firebasephonenumbersignup.databinding.FragmentAddPasswordBinding
+import uz.salimovdeveloper.firebasephonenumbersignup.models.MyNumber
+import java.util.concurrent.TimeUnit
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [AddPassword.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AddPassword : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    private lateinit var binding: FragmentAddPasswordBinding
+    private lateinit var auth: FirebaseAuth
+    private val TAG = "MainActivity"
+    lateinit var storedVerificationId:String
+    lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_password, container, false)
+        binding = FragmentAddPasswordBinding.inflate(layoutInflater)
+
+        binding.numberInfo.text = MyNumber.mynumber
+
+        auth = FirebaseAuth.getInstance()
+        auth.setLanguageCode("uz")
+
+        setVerificationCode(MyNumber.mynumber!!)
+
+        binding.addPassword.addTextChangedListener {
+            verifiyCode()
+        }
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AddPassword.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AddPassword().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun verifiyCode() {
+        val code = binding.addPassword.text.toString()
+        if (code.length == 6){
+            val credential = PhoneAuthProvider.getCredential(storedVerificationId, code)
+            signInWithPhoneAuthCredential(credential)
+        }
+    }
+
+    private fun setVerificationCode(phoneNumber: String) {
+        val options = PhoneAuthOptions.newBuilder(auth)
+            .setPhoneNumber(phoneNumber)
+            .setTimeout(60L, TimeUnit.SECONDS)
+            .setActivity(requireActivity())
+            .setCallbacks(callbacks)
+            .build()
+        PhoneAuthProvider.verifyPhoneNumber(options)
+    }
+
+    private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
+        override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+            Log.d(TAG, "onVerificationCompleted: $credential")
+            signInWithPhoneAuthCredential(credential)
+        }
+
+        override fun onVerificationFailed(e: FirebaseException) {
+
+            if (e is FirebaseAuthInvalidCredentialsException){
+
+            }else if (e is FirebaseTooManyRequestsException){
+
+            }
+
+        }
+
+        override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
+            Log.d(TAG, "onCodeSent: $verificationId")
+
+            storedVerificationId = verificationId
+            resendToken = token
+        }
+    }
+
+    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential){
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "signInWithCredential:success")
+
+                    Toast.makeText(requireContext(), "Muvaffaqiyatli", Toast.LENGTH_SHORT).show()
+                    binding.addPassword.text.clear()
+                    findNavController().navigate(R.id.numberInfo)
+
+//                    val user = task.result?.user
+                } else {
+                    // Sign in failed, display a message and update the UI
+                    Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    Toast.makeText(requireContext(), "Muvaffaqiyatsiz!!!", Toast.LENGTH_SHORT).show()
+                    if (task.exception is FirebaseAuthInvalidCredentialsException) {
+                        // The verification code entered was invalid
+                        Toast.makeText(requireContext(), "Kod xato kiritildi", Toast.LENGTH_SHORT).show()
+                    }
+                    // Update UI
                 }
             }
     }

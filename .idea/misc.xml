@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/Users/ACER/AndroidStudioProjects/FirebasePhonenumberSignup/app/src/main/res/layout/activity_main.xml" value="0.16032608695652173" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/FirebasePhonenumberSignup/app/src/main/res/layout/fragment_add_number.xml" value="0.22" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/FirebasePhonenumberSignup/app/src/main/res/layout/fragment_add_password.xml" value="0.16032608695652173" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/FirebasePhonenumberSignup/app/src/main/res/layout/fragment_number_info.xml" value="0.33" />
       </map>
     </option>
   </component>

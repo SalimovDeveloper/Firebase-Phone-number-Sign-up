@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import uz.salimovdeveloper.firebasephonenumbersignup.R
 import uz.salimovdeveloper.firebasephonenumbersignup.databinding.FragmentAddNumberBinding
+import uz.salimovdeveloper.firebasephonenumbersignup.models.MyNumber
 
 class AddNumber : Fragment() {
     private lateinit var binding: FragmentAddNumberBinding
@@ -18,11 +19,12 @@ class AddNumber : Fragment() {
     ): View? {
         binding = FragmentAddNumberBinding.inflate(layoutInflater)
 
-        val number = binding.edtNumber.text.toString().trim()
 
         binding.btnNext.setOnClickListener {
+            var number = binding.edtNumber.text.toString().trim()
             if (number !=""){
 
+                MyNumber.mynumber = number
                 findNavController().navigate(R.id.addPassword)
 
             }else{

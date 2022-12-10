@@ -8,4 +8,11 @@
     <string name="avtorizatsiyadan_o_tish_uchun_telefon_raqamingizni_kiriting">Avtorizatsiyadan o\'tish uchun telefon raqamingizni kiriting</string>
     <string name="telefon_raqamingiz">Telefon raqamingiz</string>
     <string name="next">Next</string>
+    <string name="sms_kodni_kiriting">SMS kodni kiriting</string>
+    <string name="raqamiga_yubordik">raqamiga yubordik</string>
+    <string name="sms_kod">Sms Kod</string>
+    <string name="password">Password...</string>
+    <string name="xush_kelibsi">Xush kelibsi!!!</string>
+    <string name="xush_kelibsiz1">Xush kelibsiz!!!</string>
+    <string name="_998">+998</string>
 </resources>
