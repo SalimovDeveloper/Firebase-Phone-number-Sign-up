@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "539321946572",
+    "project_id": "qoshimcha-loyiha-2",
+    "storage_bucket": "qoshimcha-loyiha-2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:539321946572:android:5cc34141ab206f3e528d69",
+        "android_client_info": {
+          "package_name": "uz.salimovdeveloper.firebasegooglesignup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "539321946572-go593jimaqc2l4114gg4jsteeoen7c6s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCg0-2VveIglelzVYrM_OLVUTkK-80m1gM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "539321946572-go593jimaqc2l4114gg4jsteeoen7c6s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:539321946572:android:5fc46fe1c2786ddc528d69",
+        "android_client_info": {
+          "package_name": "uz.salimovdeveloper.firebasephonenumbersignup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "539321946572-go593jimaqc2l4114gg4jsteeoen7c6s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCg0-2VveIglelzVYrM_OLVUTkK-80m1gM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "539321946572-go593jimaqc2l4114gg4jsteeoen7c6s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
